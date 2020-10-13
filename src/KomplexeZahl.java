@@ -12,6 +12,7 @@ public class KomplexeZahl {
      */
     private double x;
     private double y;
+    private double epsilon = 0.00000000000000001; // Doublevergleich mit Epsilon um Rundungsfehler zu vermeiden
 
     /**
      * Konstruktor
@@ -75,11 +76,10 @@ public class KomplexeZahl {
      */
     public String toString() {
         String res = "";
-        double epsilon = 0.00000000000000001; // Doublevergleich mit Epsilon um Rundungsfehler zu vermeiden
-        if (Math.abs(this.y - 0) < epsilon) { // wenn nur Realteil vorhanden
+        if (Math.abs(this.y) < epsilon) { // wenn nur Realteil vorhanden
             res += this.x;
         } else {
-            if (Math.abs(this.x - 0) < epsilon) { // wenn nur Imaginaerteil vorhanden
+            if (Math.abs(this.x) < epsilon) { // wenn nur Imaginaerteil vorhanden
                 if (Math.abs(this.y - 1) < epsilon) {
                     res += "i";
                 } else {
@@ -113,11 +113,11 @@ public class KomplexeZahl {
         KomplexeZahl z2;
         double x1 = 0, x2 = 0;
         double y1 = 0, y2 = 0;
-        if (this.x == 0) { // wenn nur Imaginaerteil vorhanden, dann +- Imaginaerteil
+        if (Math.abs(this.x) < epsilon) { // wenn nur Imaginaerteil vorhanden, dann +- Imaginaerteil
             y1 = Math.sqrt(Math.abs(this.y));
             y2 = -y1;
         } else {
-            if (this.y == 0) { // wenn nur Realteil vorhanden
+            if (Math.abs(this.y) < epsilon) { // wenn nur Realteil vorhanden
                 if (this.x > 0) { // wenn Realteil groesser 0, dann +- Realteil
                     x1 = Math.sqrt(Math.abs(this.x));
                     x2 = -x1;
