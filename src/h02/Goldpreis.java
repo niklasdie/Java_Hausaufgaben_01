@@ -18,7 +18,7 @@ public class Goldpreis {
         File gold;
         list = new ArrayList<>();
         try {
-            gold = new File("gold.txt");
+            gold = new File(dateiname);
             sc = new Scanner(gold);
             while (sc.hasNextLine()) {
                 String res = sc.nextLine();
@@ -30,14 +30,23 @@ public class Goldpreis {
                     preis = -1;
                 }
                 Goldtagespreis goldtagespreis = new Goldtagespreis(temp[0], preis);
-                list.add(goldtagespreis);
+                 list.add(goldtagespreis);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public double getPreis(String datum){
+    public double getPreis(String datum) {
+        return 0;
+    }
 
+    public String toString(){
+        return list.toString();
+    }
+
+    public static void main(String[] args) {
+        Goldpreis test = new Goldpreis("/Users/niklasdiekhoner/IdeaProjects/Java_Hausaufgaben/src/h02/gold.txt");
+        System.out.println(test.toString());
     }
 }
