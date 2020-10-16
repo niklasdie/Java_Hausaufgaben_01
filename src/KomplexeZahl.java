@@ -12,7 +12,7 @@ public class KomplexeZahl {
      */
     private double x;
     private double y;
-    private double epsilon = 0.00000000000000001; // Doublevergleich mit Epsilon um Rundungsfehler zu vermeiden
+    private static final double EPSILON = 1e-16; // Doublevergleich mit Epsilon um Rundungsfehler zu vermeiden
 
     /**
      * Konstruktor
@@ -76,20 +76,20 @@ public class KomplexeZahl {
      */
     public String toString() {
         String res = "";
-        if (Math.abs(this.y) < epsilon) { // wenn nur Realteil vorhanden
+        if (Math.abs(this.y) < EPSILON) { // wenn nur Realteil vorhanden
             res += this.x;
         } else {
-            if (Math.abs(this.x) < epsilon) { // wenn nur Imaginaerteil vorhanden
-                if (Math.abs(this.y - 1) < epsilon) {
+            if (Math.abs(this.x) < EPSILON) { // wenn nur Imaginaerteil vorhanden
+                if (Math.abs(this.y - 1) < EPSILON) {
                     res += "i";
                 } else {
                     res += this.y + " i";
                 }
             } else { // wenn Realteil und Imaginaerteil vorhanden
-                if (Math.abs(this.y - 1) < epsilon) {
+                if (Math.abs(this.y - 1) < EPSILON) {
                     res += this.x + " + i";
                 } else {
-                    if (Math.abs(this.y + 1) < epsilon) {
+                    if (Math.abs(this.y + 1) < EPSILON) {
                         res += this.x + " - i";
                     } else {
                         if (this.y < 0) {
@@ -113,11 +113,11 @@ public class KomplexeZahl {
         KomplexeZahl z2;
         double x1 = 0, x2 = 0;
         double y1 = 0, y2 = 0;
-        if (Math.abs(this.x) < epsilon) { // wenn nur Imaginaerteil vorhanden, dann +- Imaginaerteil
+        if (Math.abs(this.x) < EPSILON) { // wenn nur Imaginaerteil vorhanden, dann +- Imaginaerteil
             y1 = Math.sqrt(Math.abs(this.y));
             y2 = -y1;
         } else {
-            if (Math.abs(this.y) < epsilon) { // wenn nur Realteil vorhanden
+            if (Math.abs(this.y) < EPSILON) { // wenn nur Realteil vorhanden
                 if (this.x > 0) { // wenn Realteil groesser 0, dann +- Realteil
                     x1 = Math.sqrt(Math.abs(this.x));
                     x2 = -x1;
