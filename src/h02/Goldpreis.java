@@ -63,7 +63,7 @@ public class Goldpreis {
     /**
      * gibt den Goldpreis eines bestimmten Datums zurueck
      *
-     * @param datum Datum in Form von jjjj-mm-tt
+     * @param datum in Form von jjjj-mm-tt
      * @return den Goldpreis des angegebenen Datums
      */
     public double getPreis(String datum) {
@@ -71,8 +71,7 @@ public class Goldpreis {
             int test = Integer.parseInt(datum.substring(0, 4));
             test = Integer.parseInt(datum.substring(5, 7));
             test = Integer.parseInt(datum.substring(8, 10));
-            String test2 = "-";
-            if (!test2.equals(datum.substring(4, 5)) || !test2.equals(datum.substring(7, 8))) {
+            if (!(datum.charAt(4) == '-') && !(datum.charAt(7) == '-')) {
                 throw new NumberFormatException("");
             }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
