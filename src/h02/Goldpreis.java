@@ -35,13 +35,26 @@ public class Goldpreis {
                 String[] temp = res.split("\t");
                 double preis;
                 try {
-                    preis = (Double.parseDouble(temp[1].substring(0, 6)) * 1000);
+                    preis = Double.parseDouble(temp[1].substring(0, 1));
+                    char[] c = temp[1].toCharArray();
+                    int punktIndex = temp[1].indexOf('.');
+                    int kommaIndex = temp[1].indexOf(',');
+                    c[punktIndex] = 0;
+                    c[kommaIndex] = '.';
+                    temp[1] = "";
+                    for (char value : c) {
+                        if (value != 0) {
+                            temp[1] += value;
+                        }
+                    }
+                    preis = Double.parseDouble(temp[1]);
                 } catch (NumberFormatException e) {
                     preis = -1;
                 }
                 Goldtagespreis goldtagespreis = new Goldtagespreis(temp[0], preis);
                 list.add(goldtagespreis);
             }
+            sc.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -58,16 +71,16 @@ public class Goldpreis {
             int test = Integer.parseInt(datum.substring(0, 4));
             test = Integer.parseInt(datum.substring(5, 7));
             test = Integer.parseInt(datum.substring(8, 10));
-        } catch (NumberFormatException e) {
+            String test2 = "-";
+            if (!test2.equals(datum.substring(4, 5)) || !test2.equals(datum.substring(7, 8))) {
+                throw new NumberFormatException("");
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new NumberFormatException("Datum hat falsches Format!");
         }
-        for (int i = 0; i < list.size(); i++) {
-            if (datum.substring(8, 10).equals(list.get(i).datum.substring(8, 10))) {
-                if (datum.substring(5, 7).equals(list.get(i).datum.substring(5, 7))) {
-                    if (datum.substring(0, 4).equals(list.get(i).datum.substring(0, 4))) {
-                        return list.get(i).preis;
-                    }
-                }
+        for (Goldtagespreis goldtagespreis : list) {
+            if (datum.equals(goldtagespreis.datum)) {
+                return goldtagespreis.preis; // string vergleich
             }
         }
         throw new NumberFormatException("Datum nicht vorhanden");
