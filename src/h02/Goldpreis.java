@@ -39,11 +39,11 @@ public class Goldpreis {
                     char[] c = temp[1].toCharArray();
                     int punktIndex = temp[1].indexOf('.');
                     int kommaIndex = temp[1].indexOf(',');
-                    c[punktIndex] = 0;
+                    c[punktIndex] = (char) 0;
                     c[kommaIndex] = '.';
                     temp[1] = "";
                     for (char value : c) {
-                        if (value != 0) {
+                        if (value != (char) 0) {
                             temp[1] += value;
                         }
                     }
@@ -94,7 +94,7 @@ public class Goldpreis {
         int indexMin = 0;
         int indexMax = 0;
         for (Goldtagespreis elem : list) {
-            if (elem.preis < min && elem.preis > 0) {
+            if ((elem.preis < min || min < 0) && elem.preis > 0) {
                 min = elem.preis;
                 indexMin = list.indexOf(elem);
             }
