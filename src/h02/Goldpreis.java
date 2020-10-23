@@ -109,9 +109,7 @@ public class Goldpreis {
 
     public static void main(String[] args) {
         try {
-//            Goldpreis test = new Goldpreis("/Users/niklasdiekhoner/IdeaProjects/Java_Hausaufgaben/src/h02/gold.txt");
-            Goldpreis test = new Goldpreis("C:\\Users\\ndiekhoener\\IdeaProjects\\Java_Hausaufgaben\\src\\h02\\gold.txt");
-//            Goldpreis test = new Goldpreis("gold.txt");
+            Goldpreis test = new Goldpreis("gold.txt");
             System.out.println(test.getPreis("2009-10-20")); // 22870.0
             System.out.println(test.getPreis("2009-02-07")); // -1
             test.printMinMax();
