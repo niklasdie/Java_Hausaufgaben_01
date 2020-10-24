@@ -62,6 +62,7 @@ public class EMailAdressBuch {
         }
     }
 
+    @Override
     public String toString() {
         return map.toString();
     }
