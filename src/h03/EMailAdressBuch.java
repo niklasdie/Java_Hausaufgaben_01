@@ -48,10 +48,8 @@ public class EMailAdressBuch {
      */
     public void einlesen(String dateiname) {
         File f = new File(dateiname);
-        Scanner sc;
         String temp;
-        try {
-            sc = new Scanner(f);
+        try (Scanner sc = new Scanner(f)){
             while (sc.hasNextLine()) {
                 temp = sc.nextLine();
                 String[] temp2 = temp.split(";");
@@ -77,6 +75,6 @@ public class EMailAdressBuch {
         System.out.println("\n" + matseMitarbeiter.toString());
         System.out.println(eigen.toString());
         System.out.println(eigen.abfrage("Herbert Hermann"));
-        //System.out.println(eigen.abfrage("Bernt Müller")); // testen für UnknownNameException
+        System.out.println(eigen.abfrage("Bernt Müller")); // testen für UnknownNameException
     }
 }
