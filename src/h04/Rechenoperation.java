@@ -7,5 +7,5 @@ public interface Rechenoperation {
      * @param x ist der Wert mit der die Berechnung stattfinden soll.
      * @return das Ergebnis der Berechnung.
      */
-    public double berechne(double x);
+    double berechne(double x);
 }
