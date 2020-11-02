@@ -16,7 +16,7 @@ public class Rechenoperationsliste {
     }
 
     /**
-     * Fuegt eine neue Rechenoperation zu Liste hinzu.
+     * Fuegt eine neue Rechenoperation zur Liste hinzu.
      * @param operation Rechenoperation die hinzugefuegt wird.
      */
     public void add(Rechenoperation operation) {
@@ -24,7 +24,7 @@ public class Rechenoperationsliste {
     }
 
     /**
-     * Es werden alle Rechenoperationen in der Liste auf jedes Element des eingegebenden Feldes an.
+     * Es werden alle Rechenoperationen in der Liste auf jedes Element des eingegebenen Feldes angewendet.
      * @param feld Eingabefeld auf welche die Rechenoperationen angewendet werden.
      * @return Ergebnisfeld der angewendeten Rechenoperationen.
      */
