@@ -15,6 +15,11 @@ public class Blatt {
         if (!(arr instanceof int[]) && arr.length != 3) {
             throw new InputMismatchException("Arrayformat falsch!");
         }
+        for(int i = 0; i < 3; i++){
+            if(arr[i] < 2 || arr[i] > 14){
+                throw new InputMismatchException("Array darf nur 2 <= x <= 14");
+            }
+        }
         this.blatt = arr;
     }
 
