@@ -40,7 +40,8 @@ public class Schiebepuzzle {
      */
     public boolean istVerschiebbar(int i) {
         findeIntern(i);
-        return (Math.abs(posi[0] - frei[0]) == 1) || (Math.abs(posi[1] - frei[1]) == 1);
+        return ((Math.abs(posi[0] - frei[0]) == 1) && (posi[1]==frei[1]))
+                || ((Math.abs(posi[1] - frei[1]) == 1 && (posi[0]==frei[0])));
     }
 
     /**
@@ -63,8 +64,8 @@ public class Schiebepuzzle {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 if (puzzle[x][y] == i) {
-                    posi[0] = y;
-                    posi[1] = x;
+                    posi[0] = x;
+                    posi[1] = y;
                     return posi;
                 }
             }
@@ -113,8 +114,8 @@ public class Schiebepuzzle {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 if (puzzle[x][y] == i) {
-                    posi[0] = y;
-                    posi[1] = x;
+                    posi[0] = x;
+                    posi[1] = y;
                 }
             }
         }
