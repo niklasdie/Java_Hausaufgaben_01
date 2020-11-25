@@ -1,7 +1,7 @@
 package h07;
 
 /**
- * Wird geworfen wenn ein tauch nicht moeglich ist.
+ * Wird geworfen wenn ein Tausch nicht moeglich ist.
  */
 public class WrongMoveExceprion extends RuntimeException {
     public WrongMoveExceprion(String s) {

@@ -9,11 +9,13 @@ public class SchiebAlg1 implements Loesungsalgorithmus {
     @Override
     public void loese(Schiebepuzzle schiebepuzzle) {
         int random;
-        while ((schiebepuzzle.finde(1)[0] != 0) || (schiebepuzzle.finde(1)[1] != 0)) {
+        int[] temp = schiebepuzzle.finde(1);
+        while ((temp[0] != 0) || (temp[1] != 0)) {
             do {
                 random = ((int) (Math.random() * 10000)) % 14 + 1;
             } while (!schiebepuzzle.istVerschiebbar(random));
             schiebepuzzle.schiebe(random);
+            temp = schiebepuzzle.finde(1);
         }
     }
 }
