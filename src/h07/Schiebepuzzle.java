@@ -22,7 +22,7 @@ public class Schiebepuzzle {
      * @param i Zahl die aufs freie Feld geschoben werden soll.
      */
     public void schiebe(int i) {
-        if (i < 1 || i > 16) {
+        if (i < 1 || i > 15) {
             throw new WrongNumberException("i liegt nicht zwischen 1 und 15");
         } else {
             if (!istVerschiebbar(i)) {

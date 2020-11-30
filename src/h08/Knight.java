@@ -6,6 +6,7 @@ public class Knight extends Chessman {
 
     /**
      * Konstruiert ein neues Objekt der Klasse Knight. Diese Klasse erweitert die Klasse Chessman.
+     *
      * @param pos eine Position
      */
     public Knight(Position pos) {

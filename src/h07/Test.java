@@ -13,6 +13,5 @@ public class Test {
         Loesungsalgorithmus alg1 = new SchiebAlg1();
         alg1.loese(puzzle);
         System.out.println("\nGeloestes Puzzel:\n" + puzzle.toString());
-
     }
 }

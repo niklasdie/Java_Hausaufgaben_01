@@ -9,11 +9,12 @@ public class Position {
 
     /**
      * Konstruiert ein neues Objekt mit den angegebenen Koordinaten
+     *
      * @param x Koordinate der Position
      * @param y Koordinate der Position
      */
     public Position(int x, int y) {
-        if(isValid(x,y)) {
+        if (isValid(x, y)) {
             this.x = x;
             this.y = y;
         } else {
@@ -23,6 +24,7 @@ public class Position {
 
     /**
      * Ueberprueft ob die eingegebenen Koordinaten auf dem Spielbrett liegen und gibt dies zurueck.
+     *
      * @param x zu ueberpruefene x Koordinate
      * @param y zu ueberpruefene y Koordinate
      * @return einen Wahrheitswert
@@ -33,6 +35,7 @@ public class Position {
 
     /**
      * Getter die die x Koordinate zurueckgibt
+     *
      * @return x Koordinate
      */
     public int getX() {
@@ -41,6 +44,7 @@ public class Position {
 
     /**
      * Getter die die y Koordinate zurueckgibt
+     *
      * @return y Koordinate
      */
     public int getY() {
@@ -49,6 +53,7 @@ public class Position {
 
     /**
      * Ueberprueft ob zwei Positionen gleich sind und gibt dies zurueck.
+     *
      * @param p zu vergleichene Postion
      * @return einen Wahrheitswert ob die Positonen gleich sind
      */
@@ -58,6 +63,7 @@ public class Position {
 
     /**
      * Erstellt eine geeignete Darstellung des Punktes.
+     *
      * @return Darstellung des Punktes als String
      */
     public String toString() {
