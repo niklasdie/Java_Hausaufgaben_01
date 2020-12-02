@@ -15,6 +15,7 @@ public class Knight extends Chessman {
 
     /**
      * Erstellt eine ArrayList mit moeglichen Positionen an die sich die Figur bewegen kann und gibt diese zurueck.
+     *
      * @return eine ArrayList mit moeglichen Positionen
      */
     @Override
@@ -56,6 +57,7 @@ public class Knight extends Chessman {
 
     /**
      * Erzeugt eine passende Darstellung der Position dieser Figur und gibt diese zurueck.
+     *
      * @return Darstellung der Position als String
      */
     public String toString() {

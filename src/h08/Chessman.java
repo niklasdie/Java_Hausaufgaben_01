@@ -1,7 +1,19 @@
 package h08;
 
+import h07.WrongMoveExceprion;
+
 import java.util.ArrayList;
 
+/*
+    Information für Korrektor:
+
+    Sebastian (erster in unserer Hausaufgabengruppe 17) hat leider mit der MATSE Ausbildung
+    aufgehört, in Zukunft brauchen Sie bei ihm nicht mehr nachschauen, da seins immer leer sein sollte.
+
+    Viele Gruesse
+
+    Max und Niklas (aus der Hausaufgabengruppe 17)
+ */
 public abstract class Chessman {
 
     Position pos;
@@ -16,7 +28,7 @@ public abstract class Chessman {
     }
 
     /**
-     * Abstrakte Methode welche in der erbenden Klasse inizialisiert wird.
+     * Abstrakte Methode welche in der erbenden Klasse initialisiert wird.
      * Soll die moeglichen Zuege einer bestimmten Figur ermitteln und sie in einer ArrayList zurueckgeben.
      *
      * @return eine Arraylist mit den moeglichen Schritten
@@ -35,13 +47,13 @@ public abstract class Chessman {
     /**
      * Bewegt die Figur zur angegebenen Position.
      *
-     * @param pos Position, zu der sich die Figur begen soll.
+     * @param pos Position, zu der sich die Figur bewegen soll.
      */
     public void moveTo(Position pos) {
         if (this.canMoveTo(pos)) {
             this.pos = pos;
         } else {
-            throw new IndexOutOfBoundsException("Move nicht moeglich!");
+            throw new WrongMoveExceprion("Move nicht moeglich!");
         }
     }
 

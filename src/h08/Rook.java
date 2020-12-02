@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Rook extends Chessman {
 
     /**
-     * Konstruiert ein neues Objekt der Klasse Knight. Diese Klasse erweitert die Klasse Chessman.
+     * Konstruiert ein neues Objekt der Klasse Rook. Diese Klasse erweitert die Klasse Chessman.
      *
      * @param pos eine Position
      */

@@ -1,14 +1,12 @@
 package h08;
 
-import java.util.InputMismatchException;
-
 public class Position {
 
     private final int x;
     private final int y;
 
     /**
-     * Konstruiert ein neues Objekt mit den angegebenen Koordinaten
+     * Konstruiert ein neues Objekt Position mit den angegebenen Koordinaten.
      *
      * @param x Koordinate der Position
      * @param y Koordinate der Position
@@ -18,12 +16,12 @@ public class Position {
             this.x = x;
             this.y = y;
         } else {
-            throw new InputMismatchException("Falsche Eingabe!");
+            throw new WrongPositionException("Position nicht moeglich!");
         }
     }
 
     /**
-     * Ueberprueft ob die eingegebenen Koordinaten auf dem Spielbrett liegen und gibt dies zurueck.
+     * Ueberprueft ob die eingegebenen Koordinaten auf dem Spielbrett liegen und gibt das Ergebnis zurueck.
      *
      * @param x zu ueberpruefene x Koordinate
      * @param y zu ueberpruefene y Koordinate
@@ -52,10 +50,10 @@ public class Position {
     }
 
     /**
-     * Ueberprueft ob zwei Positionen gleich sind und gibt dies zurueck.
+     * Ueberprueft ob zwei Positionen gleich sind und gibt das Ergebnis zurueck.
      *
-     * @param p zu vergleichene Postion
-     * @return einen Wahrheitswert ob die Positonen gleich sind
+     * @param p zu vergleichene Position
+     * @return Wahrheitswert ob die Positionen gleich sind
      */
     public boolean equals(Position p) {
         return (p.x == this.x) && (p.y == this.y);
