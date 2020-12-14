@@ -42,45 +42,31 @@ public class Zahlwort {
         switch (length) {
             case 1:
                 if (x == 1) {
-                    res += getZahl(x) + "s";
+                    res = getZahl(x) + "s";
                 } else {
-                    res += getZahl(x);
+                    res = getZahl(x);
                 }
                 break;
             case 2:
-                if (x % 10 == 0) {
-                    if (x == 10 || x == 20 || x == 60 || x == 70) {
-                        res += getZahl(x);
-                    } else {
-                        res += getZahl(x / 10) + "zig";
-                    }
+                if (x < 13 || x == 16 || x == 17 || x == 20 || x == 60 || x == 70) {
+                    res = getZahl(x);
                 } else {
                     if (x < 20) {
-                        if (x == 17) {
-                            res += getZahl(x);
-                        } else {
-                            if (x < 13) {
-                                res += getZahl(x);
-                            } else {
-                                res += getZahl(x % 10) + "zehn";
-                            }
-                        }
+                        res = getZahl(x % 10) + getZahl(10);
                     } else {
                         if (x / 10 == 2 || x / 10 == 6 || x / 10 == 7) {
-                            res += getZahl(x % 10) + "und" + getZahl((x / 10) * 10);
+                            res = getZahl(x % 10) + getZahl(0) + getZahl((x / 10) * 10);
                         } else {
-                            res += getZahl(x % 10) + "und" + getZahl(x / 10) + "zig";
+                            res = getZahl(x % 10) + getZahl(0) + getZahl(x / 10) + "zig";
                         }
                     }
                 }
                 break;
             case 3:
-                res += getZahl(x / 100) + "hundert";
-                res += buildZahlwort(x % 100, length - 1);
+                res = getZahl(x / 100) + "hundert" + buildZahlwort(x % 100, length - 1);
                 break;
             case 4:
-                res += getZahl(x / 1000) + "tausend";
-                res += buildZahlwort(x % 1000, length - 1);
+                res = getZahl(x / 1000) + "tausend" + buildZahlwort(x % 1000, length - 1);
                 break;
         }
         return res;
@@ -111,7 +97,7 @@ public class Zahlwort {
         String res = "";
         switch (x) {
             case 0:
-                res += "";
+                res += "und";
                 break;
             case 1:
                 res += "ein";
@@ -132,7 +118,7 @@ public class Zahlwort {
                 res += "sechs";
                 break;
             case 7:
-                res += " sieben";
+                res += "sieben";
                 break;
             case 8:
                 res += "acht";
@@ -147,7 +133,7 @@ public class Zahlwort {
                 res += "elf";
                 break;
             case 12:
-                res += "zoelf";
+                res += "zwoelf";
                 break;
             case 16:
                 res += "sechzehn";
@@ -174,7 +160,7 @@ public class Zahlwort {
         System.out.println();
         System.out.println("Test 1:");
         // erweiterte Ausgaben fuer problematische Zahlen
-        int[] testtabelle = {1, 10, 11, 12, 16, 17, 20, 25, 38, 60, 69,
+        int[] testtabelle = {1, 10, 11, 12, 13, 16, 17, 20, 25, 38, 60, 69,
                 70, 73, 131, 195, 201, 202, 211, 735, 1111, 2345, 6854};
         for (int z : testtabelle) {
             String zahlwort = Zahlwort.getZahlwort(z);
