@@ -1,13 +1,13 @@
 package h10;
 
-import java.util.HashMap;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Zahlwort {
 
     /**
-     * Diese Funktion gibt für alle natürlichen Zahlen (von 1 bis 9999) das deutsche Zahlwort zurueck.
+     * Diese Funktion gibt für alle natuerlichen Zahlen (von 1 bis 9999) das deutsche Zahlwort zurueck.
+     *
      * @param x Zahl die als String zurueck gegeben werden soll
      * @return String
      */
@@ -21,8 +21,9 @@ public class Zahlwort {
 
     /**
      * Gibt alle Zahlen zwischen dem Startwert und Endwert als Zahlwort zurueck.
+     *
      * @param start Startwert
-     * @param stop Endwert
+     * @param stop  Endwert
      * @return Stream aus Zahlwoertern
      */
     public static Stream<String> getZahlStream(int start, int stop) {
@@ -31,7 +32,8 @@ public class Zahlwort {
 
     /**
      * Hilfsfunktion die das Zahlwort aufbaut.
-     * @param x Zahl
+     *
+     * @param x      Zahl
      * @param length Anzahl der Ziffern
      * @return Zahl als Zahlwort
      */
@@ -40,27 +42,22 @@ public class Zahlwort {
         switch (length) {
             case 1:
                 if (x == 1) {
-                    res += "eins";
+                    res += getZahl(x) + "s";
                 } else {
                     res += getZahl(x);
                 }
                 break;
             case 2:
                 if (x % 10 == 0) {
-                    if (x == 10) {
-                        res += "zehn";
+                    if (x == 10 || x == 20 || x == 60 || x == 70) {
+                        res += getZahl(x);
                     } else {
-                        if (x / 10 == 7) {
-                            res += "siebzig";
-                        } else {
-                            res += getZahl(x / 10) + "zig";
-                        }
-
+                        res += getZahl(x / 10) + "zig";
                     }
                 } else {
                     if (x < 20) {
-                        if (x % 10 == 7) {
-                            res += "siebzehn";
+                        if (x == 17) {
+                            res += getZahl(x);
                         } else {
                             if (x < 13) {
                                 res += getZahl(x);
@@ -69,8 +66,8 @@ public class Zahlwort {
                             }
                         }
                     } else {
-                        if (x / 10 == 7) {
-                            res += getZahl(x % 10) + "und" + "siebzig";
+                        if (x / 10 == 2 || x / 10 == 6 || x / 10 == 7) {
+                            res += getZahl(x % 10) + "und" + getZahl((x / 10) * 10);
                         } else {
                             res += getZahl(x % 10) + "und" + getZahl(x / 10) + "zig";
                         }
@@ -91,6 +88,7 @@ public class Zahlwort {
 
     /**
      * Hilfsfunktion die die Laenge bzw die Anzahl der Ziffern einer Zahl bestimmt und zurueck gibt.
+     *
      * @param x Zahl
      * @return Laenge als int
      */
@@ -105,27 +103,69 @@ public class Zahlwort {
 
     /**
      * Hilfsfunktion die die Informationen fuer den String liefert.
+     *
      * @param x Zahl die als String zurueck gegeben wird
      * @return Zahlwort
      */
     private static String getZahl(int x) {
-        HashMap<Integer, String> map = new HashMap<>();
-        map.put(0, "");
-        map.put(1, "ein");
-        map.put(2, "zwei");
-        map.put(3, "drei");
-        map.put(4, "vier");
-        map.put(5, "fuenf");
-        map.put(6, "sechs");
-        map.put(7, "sieben");
-        map.put(8, "acht");
-        map.put(9, "neun");
-        map.put(10, "zehn");
-        map.put(11, "elf");
-        map.put(12, "zwoelf");
-        map.put(20, "zwan");
-
-        return map.get(x);
+        String res = "";
+        switch (x) {
+            case 0:
+                res += "";
+                break;
+            case 1:
+                res += "ein";
+                break;
+            case 2:
+                res += "zwei";
+                break;
+            case 3:
+                res += "drei";
+                break;
+            case 4:
+                res += "vier";
+                break;
+            case 5:
+                res += "fuenf";
+                break;
+            case 6:
+                res += "sechs";
+                break;
+            case 7:
+                res += " sieben";
+                break;
+            case 8:
+                res += "acht";
+                break;
+            case 9:
+                res += "neun";
+                break;
+            case 10:
+                res += "zehn";
+                break;
+            case 11:
+                res += "elf";
+                break;
+            case 12:
+                res += "zoelf";
+                break;
+            case 16:
+                res += "sechzehn";
+                break;
+            case 17:
+                res += "siebzehn";
+                break;
+            case 20:
+                res += "zwanzig";
+                break;
+            case 60:
+                res += "sechzig";
+                break;
+            case 70:
+                res += "siebzig";
+                break;
+        }
+        return res;
     }
 
     //testen
@@ -133,8 +173,9 @@ public class Zahlwort {
         // testen, ob ein paar typische Zahlwoerter richtig herauskommen:
         System.out.println();
         System.out.println("Test 1:");
-        int[] testtabelle = {1, 10, 11, 12, 16, 17, 20, 38, 69,
-                70, 131, 195, 201, 202, 211, 1111, 2345};
+        // erweiterte Ausgaben fuer problematische Zahlen
+        int[] testtabelle = {1, 10, 11, 12, 16, 17, 20, 25, 38, 60, 69,
+                70, 73, 131, 195, 201, 202, 211, 735, 1111, 2345, 6854};
         for (int z : testtabelle) {
             String zahlwort = Zahlwort.getZahlwort(z);
             System.out.println("zahl = " + z + " --> " + zahlwort);
