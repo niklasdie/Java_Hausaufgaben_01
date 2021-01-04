@@ -2,7 +2,7 @@ package h11;
 
 /**
  * Diese Klasse kann Zahlen aus dem Binaer-, Dezimal- und Hexadezimalsystem erhalten
- * und diese in eins der anderen umrechnen und zurueckgeben.
+ * und diese in eins der anderen Zahlensysteme umrechnen und zurueckgeben.
  */
 public class PositiveNumber {
     private final String hexDigits = "0123456789ABCDEF";
@@ -31,12 +31,13 @@ public class PositiveNumber {
      */
     public void setDecimal(String s) {
         this.value = 0;
-        this.proof(s);
+        this.proofDec(s);
         for (int i = 0; i < s.length(); i++) { // extra kein Integer.parseInt()
             char c = s.charAt(i);
             int d = this.hexDigits.indexOf(c);
             this.value = this.value * 10 + d;
         }
+        this.proofVal();
     }
 
     /**
@@ -62,12 +63,13 @@ public class PositiveNumber {
     public void setHexadecimal(String s) {
         this.value = 0;
         s = s.toUpperCase();
-        proof(s);
+        proofHex(s);
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             int d = this.hexDigits.indexOf(c);
             this.value = this.value * 16 + d;
         }
+        this.proofVal();
     }
 
     /**
@@ -92,25 +94,58 @@ public class PositiveNumber {
      */
     public void setBinary(String s) {
         this.value = 0;
-        this.proof(s);
+        this.proofBin(s);
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             int d = this.hexDigits.indexOf(c);
             this.value = this.value * 2 + d;
         }
+        this.proofVal();
     }
 
     /**
-     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulässig ist.
+     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulaessig ist (Hexadezimal).
      *
      * @param s Zahl als String
      */
-    private void proof(String s) {
+    private void proofHex(String s) {
         for (int i = 0; i < s.length(); i++) {
             if (this.hexDigits.indexOf(s.charAt(i)) == -1) {
-                throw new NumberFormatException("Keine zulässige Zahl!");
+                throw new NumberFormatException("Keine zulaessige Zahl!");
             }
         }
+    }
+
+    /**
+     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulaessig ist (Dezimal).
+     *
+     * @param s Zahl als String
+     */
+    private void proofDec(String s) {
+        String digits = "0123456789";
+        for (int i = 0; i < s.length(); i++) {
+            if (digits.indexOf(s.charAt(i)) == -1) {
+                throw new NumberFormatException("Keine zulaessige Zahl!");
+            }
+        }
+    }
+
+    /**
+     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulaessig ist (Binaer).
+     *
+     * @param s Zahl als String
+     */
+    private void proofBin(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != '0' && s.charAt(i) != '1') {
+                throw new NumberFormatException("Keine zulaessige Zahl!");
+            }
+        }
+    }
+
+    private void proofVal() {
+        if (value < 0) // Man braucht nicht zu ueberpruefen ob value > Integer.MAX_VALUE, da Ueberlauf
+            throw new NumberFormatException("Zahl < 0 oder > Integer.MAX_VALUE!");
     }
 
     // Testen
