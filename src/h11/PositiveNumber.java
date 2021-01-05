@@ -30,14 +30,7 @@ public class PositiveNumber {
      * @param s Dezimalzahl als String
      */
     public void setDecimal(String s) {
-        this.value = 0;
-        this.proofDec(s);
-        for (int i = 0; i < s.length(); i++) { // extra kein Integer.parseInt()
-            char c = s.charAt(i);
-            int d = this.hexDigits.indexOf(c);
-            this.value = this.value * 10 + d;
-        }
-        this.proofVal();
+        this.setValue(s, 10);
     }
 
     /**
@@ -46,13 +39,7 @@ public class PositiveNumber {
      * @return Hexadezimalzahl als String
      */
     public String getHexadecimal() {
-        int x = this.value;
-        StringBuilder res = new StringBuilder();
-        while (x > 0) {
-            res.insert(0, this.hexDigits.charAt(x % 16));
-            x /= 16;
-        }
-        return res.toString();
+        return this.getValue(16);
     }
 
     /**
@@ -61,15 +48,8 @@ public class PositiveNumber {
      * @param s Hexadezimalzahl als String
      */
     public void setHexadecimal(String s) {
-        this.value = 0;
         s = s.toUpperCase();
-        proofHex(s);
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            int d = this.hexDigits.indexOf(c);
-            this.value = this.value * 16 + d;
-        }
-        this.proofVal();
+        this.setValue(s, 16);
     }
 
     /**
@@ -78,13 +58,7 @@ public class PositiveNumber {
      * @return Binaerzahl als String
      */
     public String getBinary() {
-        int x = this.value;
-        StringBuilder res = new StringBuilder();
-        while (x > 0) {
-            res.insert(0, x % 2 == 0 ? "0" : "1");
-            x /= 2;
-        }
-        return res.toString();
+        return this.getValue(2);
     }
 
     /**
@@ -93,59 +67,67 @@ public class PositiveNumber {
      * @param s Binaerzahl als String
      */
     public void setBinary(String s) {
+        this.setValue(s, 2);
+    }
+
+    /**
+     * Hilfsmethode die value setzt egal ob Dezimal oder Hexadezimal.
+     *
+     * @param s Zahl als String
+     * @param x 10 oder 16 je nach Dezimal oder Hexadezimal
+     */
+    private void setValue(String s, int x) { // Codedopplung Vermeidung
         this.value = 0;
-        this.proofBin(s);
+        this.proofBinDecHex(s, x);
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             int d = this.hexDigits.indexOf(c);
-            this.value = this.value * 2 + d;
+            this.value = this.value * x + d;
         }
         this.proofVal();
     }
 
     /**
-     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulaessig ist (Hexadezimal).
+     * Hilfsmethode die value zurueck gibt egal ob Dezimal oder Hexadezimal.
+     *
+     * @param x 2 oder 16 je nach Binaer oder Hexadezimal
+     */
+    private String getValue(int x){ // Codedopplung Vermeidung
+        int v = this.value;
+        StringBuilder res = new StringBuilder();
+        if (v == 0) {
+            res.append("0");
+        } else {
+            while (v > 0) {
+                res.insert(0, this.hexDigits.charAt(v % x));
+                v /= x;
+            }
+        }
+        return res.toString();
+    }
+
+    /**
+     * Hilfsmethode die prueft ob der String der eingegeben wurde zulaessig ist.
      *
      * @param s Zahl als String
      */
-    private void proofHex(String s) {
+    private void proofBinDecHex(String s, int x) { // Codedopplung Vermeidung
         for (int i = 0; i < s.length(); i++) {
-            if (this.hexDigits.indexOf(s.charAt(i)) == -1) {
+            int indexOf = hexDigits.indexOf(s.charAt(i));
+            if (indexOf == -1 || indexOf > x - 1) {
                 throw new NumberFormatException("Keine zulaessige Zahl!");
             }
         }
     }
 
     /**
-     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulaessig ist (Dezimal).
-     *
-     * @param s Zahl als String
+     * Hilfsmethode die prueft ob die Zahl die eingegeben wurde zulaessig ist.
      */
-    private void proofDec(String s) {
-        String digits = "0123456789";
-        for (int i = 0; i < s.length(); i++) {
-            if (digits.indexOf(s.charAt(i)) == -1) {
-                throw new NumberFormatException("Keine zulaessige Zahl!");
-            }
-        }
-    }
-
-    /**
-     * Hilfsmethode die prueft ob eine Zahl die eingegeben wurde zulaessig ist (Binaer).
-     *
-     * @param s Zahl als String
-     */
-    private void proofBin(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) != '0' && s.charAt(i) != '1') {
-                throw new NumberFormatException("Keine zulaessige Zahl!");
-            }
-        }
-    }
-
     private void proofVal() {
-        if (value < 0) // Man braucht nicht zu ueberpruefen ob value > Integer.MAX_VALUE, da Ueberlauf
+        if (this.value < 0) { // Man braucht nicht zu ueberpruefen ob value > Integer.MAX_VALUE, da Ueberlauf
+            this.value = 0;
             throw new NumberFormatException("Zahl < 0 oder > Integer.MAX_VALUE!");
+        }
     }
 
     // Testen
