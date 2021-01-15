@@ -15,8 +15,8 @@ public class MyArrayList<T> {
      */
     @SuppressWarnings("unchecked")// wegen Konstruktor von T[]
     public MyArrayList() {
-        arr = (T[]) new Object[10];
-        index = 0;
+        this.arr = (T[]) new Object[10];
+        this.index = 0;
     }
 
     /**
@@ -27,7 +27,7 @@ public class MyArrayList<T> {
     public void addFirst(T data) {
         this.proof();
         int i = this.index;
-        while (i != 0) {
+        while (i > 0) {
             this.arr[i] = this.arr[i - 1];
             i--;
         }
@@ -53,10 +53,10 @@ public class MyArrayList<T> {
      * @return Element aus der ArrayList
      */
     public T get(int i) {
-        if (i < 0 || i >= index) {
+        if (i < 0 || i >= this.index) {
             throw new ArrayIndexOutOfBoundsException("i ist negativ oder zu groß!");
         } else {
-            return arr[i];
+            return this.arr[i];
         }
     }
 
@@ -75,16 +75,14 @@ public class MyArrayList<T> {
      * @return Groesse der ArrayList
      */
     public int size() {
-        return index;
+        return this.index;
     }
 
     /**
      * Hilfsmethode die ueberprueft ob in der ArrayList Platz fuer ein weiteres Element ist.
      */
     private void proof() {
-        if (this.arr[this.arr.length - 1] != null) {
-            this.extendAndCopy();
-        }
+        if (this.arr[this.arr.length - 1] != null) this.extendAndCopy();
     }
 
     /**
@@ -98,7 +96,7 @@ public class MyArrayList<T> {
         this.index = 0;
         for (T x : temp) {
             this.arr[index] = x;
-            index++;
+            this.index++;
         }
     }
 
