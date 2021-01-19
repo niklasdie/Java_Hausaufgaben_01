@@ -19,16 +19,11 @@ public class Huffman {
         String message = "";
         try (Scanner sc = new Scanner(f)) { // Textdatei einlesen
             String line;
-            int index = 0;
-            while (sc.hasNextLine()) { // Dekodierungstabelle erstellen
+            message = sc.nextLine();
+            for (int i = 0; i < 27; i++) { // Dekodierungstabelle erstellen
                 line = sc.nextLine();
-                if (index == 0) {
-                    message = line;
-                } else {
-                    proof(line); // Dekodierungstabelle wird ueberprueft auf Gueltigkeit
-                    tabelle[index - 1] = line;
-                }
-                index++;
+                proof(line); // Dekodierungstabelle wird ueberprueft auf Gueltigkeit
+                tabelle[i] = line;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -62,21 +57,13 @@ public class Huffman {
     private static String convertToChar(String message, String[] tabelle) {
         final String buchstaben = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
         StringBuilder zeichen = new StringBuilder();
-        int index = 0;
-        while (true) {
-            if (message.length() > index) {
-                zeichen.append(message.charAt(index));
-                for (int i = 0; i < tabelle.length; i++) {
-                    if (tabelle[i].equals(zeichen.toString())) {
-                        zeichen.insert(0, buchstaben.charAt(i));
-                        return zeichen.charAt(0) + convertToChar(message.substring(zeichen.length() - 1), tabelle);
-                    }
-                }
-                index++;
-            } else {
-                return "";
-            }
+        for (int i = 0; i < message.length(); i++) { // durchlauf des kodierten Textes
+            zeichen.append(message.charAt(i));
+            for (int j = 0; j < 27; j++) // durchlauf der Dekodierungstabelle
+                if (tabelle[j].equals(zeichen.toString())) // Uebereinstimmung von kodierter Text mit Dekodierungstab.
+                    return buchstaben.charAt(j) + convertToChar(message.substring(zeichen.length()), tabelle);
         }
+        return "";
     }
 
     // Testen
