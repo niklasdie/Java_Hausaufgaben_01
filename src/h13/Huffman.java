@@ -25,7 +25,7 @@ public class Huffman {
                 if (index == 0) {
                     message = line;
                 } else {
-                    proof(line);
+                    proof(line); // Dekodierungstabelle wird ueberprueft auf Gueltigkeit
                     tabelle[index - 1] = line;
                 }
                 index++;
@@ -33,7 +33,7 @@ public class Huffman {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        proof(message);
+        proof(message); // kodierter Text wird ueberprueft auf Gueltigkeit
         return convertToChar(message, tabelle); // Ergebnis erzeugen durch dekodieren
     }
 
@@ -81,6 +81,6 @@ public class Huffman {
 
     // Testen
     public static void main(String[] args) {
-        System.out.println("\n" + decode(new File("./src/h13/message.txt"))); // Mac
+        System.out.println("\n" + decode(new File("./src/h13/message.txt")));
     }
 }
