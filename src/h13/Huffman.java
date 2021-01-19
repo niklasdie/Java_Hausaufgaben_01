@@ -38,12 +38,10 @@ public class Huffman {
      * @param s der zu ueberpruefende String
      */
     private static void proof(String s) {
-        if (!s.equals("")) {
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                if (!(c == '0' || c == '1')) // String s muss immer aus 0 oder 1 bestehen
-                    throw new IllegalArgumentException("Dateiformat falsch!");
-            }
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!(c == '0' || c == '1')) // String s muss immer aus 0 oder 1 bestehen
+                throw new IllegalArgumentException("Dateiformat falsch!");
         }
     }
 
